@@ -32,13 +32,14 @@ app.get("/api/notes", (req, res) => {
 
 app.get("/api/notes/:id", (request, response) => {
   const id = Number(request.params.id);
-  const note = Note.findById(id).then(note => {return note})
-  if (note) {
-    response.json(note);
-  } else {
-    response.status(404).end();
-  }
-}).catch(error => next(error));
+  Note.findById(id).then(note => {
+    if (note) {
+      response.json(note);
+    } else {
+      response.status(404).end();
+    }
+  }).catch(error => next(error));
+})
 
 app.delete("/api/notes/:id", (req, res) => {
   const id = Number(req.params.id);
