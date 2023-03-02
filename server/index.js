@@ -46,12 +46,12 @@ app.post("/api/notes/", (request, response) => {
   if(body.content == undefined){
     return response.status(400).json({error: 'content missing'});
   }
-  const Note = Note({
+  const no = Note({
     content: body.content,
     important: body.important
   })
 
-  Note.save().then(
+  no.save().then(
     res => response.json(res)
   )
 });
