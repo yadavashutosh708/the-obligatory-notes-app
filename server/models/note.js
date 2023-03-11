@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
-const url =  "mongodb+srv://ashu:Ak%4012345@cluster0.cxv9wkv.mongodb.net/?retryWrites=true&w=majority";
-
-mongoose.set('strictQuery', false);
-
-mongoose.connect(url).then(res => console.log('Database connected')).catch(error => console.log('error connecting to Database', error.message))
 
 const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean
+  content: {
+    type: String,
+    minLength: 5,
+    required: true
+  },
+  important: Boolean,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 noteSchema.set('toJSON',
